@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020 Unikue Ltd. All rights reserved.
+ * Copyright (c) 2020 Jiovan Ltd. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package cn.unikue.springstarter.mybatisdelegator.config;
+package com.jiovan.spring.starter.mybatisdelegator.config;
 
 
 import java.util.List;
@@ -34,17 +34,17 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.jdbc.core.JdbcOperations;
-import cn.unikue.springstarter.mybatisdelegator.composer.MybatisConfigurationDelegator;
-import cn.unikue.springstarter.mybatisdelegator.composer.impl.MybatisConfigurationDelegatorImpl;
-import cn.unikue.springstarter.mybatisdelegator.property.MybatisDelegatorProperties;
+import com.jiovan.spring.starter.mybatisdelegator.composer.MybatisConfigurationDelegator;
+import com.jiovan.spring.starter.mybatisdelegator.composer.impl.MybatisConfigurationDelegatorImpl;
+import com.jiovan.spring.starter.mybatisdelegator.property.MybatisDelegatorProperties;
 import jakarta.annotation.Nonnull;
 
 
 /**
- * Configuration for {@link cn.unikue.springstarter.mybatisdelegator.composer.MybatisConfigurationDelegator}
+ * Configuration for {@link com.jiovan.spring.starter.mybatisdelegator.composer.MybatisConfigurationDelegator}
  *
  * @author David Hsing
- * @see cn.unikue.springstarter.mybatisdelegator.composer.MybatisConfigurationDelegator
+ * @see com.jiovan.spring.starter.mybatisdelegator.composer.MybatisConfigurationDelegator
  */
 @Configuration(proxyBeanMethods = false)
 @ConditionalOnBooleanProperty(prefix = MybatisDelegatorAutoConfiguration.PROPERTIES_PREFIX, name = "enabled", matchIfMissing = true)
@@ -52,9 +52,21 @@ import jakarta.annotation.Nonnull;
 @EnableConfigurationProperties(value = MybatisDelegatorProperties.class)
 @SuppressWarnings({"rawtypes", "SpringFacetCodeInspection"})
 public class MybatisDelegatorAutoConfiguration {
-    public static final String PROPERTIES_PREFIX = "spring.mybatis-delegator";    // $NON-NLS-1$
+    public static final String PROPERTIES_PREFIX = "jiovan.mybatis-delegator";    // $NON-NLS-1$
     public static final String CONFIGURATION_DELEGATOR = "mybatisConfigurationDelegator";    // $NON-NLS-1$
 
+    /**
+     * Returns the {@link com.jiovan.spring.starter.mybatisdelegator.composer.MybatisConfigurationDelegator} bean that collects the MyBatis interceptors, type handlers and customizers
+     *
+     * @param interceptors the provider of MyBatis interceptors
+     * @param typeHandlers the provider of MyBatis type handlers
+     * @param languageDrivers the provider of MyBatis language drivers
+     * @param resourceLoader the resource loader used to resolve MyBatis resources
+     * @param databaseIdProviders the provider of the database id provider
+     * @param configurationCustomizers the provider of configuration customizer lists
+     *
+     * @return the MyBatis configuration delegator
+     */
     @Bean(name = CONFIGURATION_DELEGATOR)
     @ConditionalOnMissingBean(name = CONFIGURATION_DELEGATOR)
     public MybatisConfigurationDelegator configurationDelegator(@Nonnull ObjectProvider<Interceptor[]> interceptors, @Nonnull ObjectProvider<TypeHandler[]> typeHandlers, @Nonnull ObjectProvider<LanguageDriver[]> languageDrivers, @Nonnull ResourceLoader resourceLoader, @Nonnull ObjectProvider<DatabaseIdProvider> databaseIdProviders, @Nonnull ObjectProvider<List<ConfigurationCustomizer>> configurationCustomizers) {

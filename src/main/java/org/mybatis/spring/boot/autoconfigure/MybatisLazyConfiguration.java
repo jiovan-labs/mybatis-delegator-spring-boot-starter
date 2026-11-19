@@ -38,8 +38,8 @@ import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnSingleCandidate;
-import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.boot.jdbc.autoconfigure.DataSourceAutoConfiguration;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
@@ -47,7 +47,7 @@ import org.springframework.util.Assert;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
-import cn.unikue.commonplexus.springutil.util.ClassPathWraps;
+import com.jiovan.plexus.spring.toolkit.util.ClassPathWraps;
 import jakarta.annotation.Nonnull;
 
 
@@ -103,8 +103,16 @@ public class MybatisLazyConfiguration /*implements InitializingBean*/ {
         }
     }
 
-    // @Bean
-    // @ConditionalOnMissingBean
+    /**
+     * Returns the MyBatis {@link org.apache.ibatis.session.SqlSessionFactory} bean built from the given data source and MyBatis properties
+     *
+     * @param dataSource the data source used by the SQL session factory
+     * @param properties the MyBatis properties used to configure the factory
+     *
+     * @return the configured SQL session factory
+     *
+     * @throws java.lang.Exception if the SQL session factory cannot be built
+     */
     public SqlSessionFactory sqlSessionFactory(@Nonnull DataSource dataSource, @Nonnull MybatisProperties properties) throws Exception {
         checkConfigFileExists(properties);
 
@@ -178,8 +186,14 @@ public class MybatisLazyConfiguration /*implements InitializingBean*/ {
         factory.setConfiguration(configuration);
     }
 
-    // @Bean
-    // @ConditionalOnMissingBean
+    /**
+     * Returns the MyBatis {@link org.mybatis.spring.SqlSessionTemplate} bean built from the given factory and MyBatis properties
+     *
+     * @param sqlSessionFactory the SQL session factory used to create sessions
+     * @param properties the MyBatis properties holding the executor type
+     *
+     * @return the configured SQL session template
+     */
     public SqlSessionTemplate sqlSessionTemplate(@Nonnull SqlSessionFactory sqlSessionFactory, @Nonnull MybatisProperties properties) {
         checkConfigFileExists(properties);
         ExecutorType executorType = properties.getExecutorType();

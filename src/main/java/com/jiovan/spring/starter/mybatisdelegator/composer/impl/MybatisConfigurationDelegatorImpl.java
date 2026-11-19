@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020 Unikue Ltd. All rights reserved.
+ * Copyright (c) 2020 Jiovan Ltd. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,11 +14,10 @@
  * limitations under the License.
  */
 
-package cn.unikue.springstarter.mybatisdelegator.composer.impl;
+package com.jiovan.spring.starter.mybatisdelegator.composer.impl;
 
 
 import java.util.List;
-import jakarta.annotation.Nonnull;
 import javax.sql.DataSource;
 import org.apache.ibatis.mapping.DatabaseIdProvider;
 import org.apache.ibatis.plugin.Interceptor;
@@ -31,7 +30,8 @@ import org.mybatis.spring.boot.autoconfigure.MybatisLazyConfiguration;
 import org.mybatis.spring.boot.autoconfigure.MybatisProperties;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.core.io.ResourceLoader;
-import cn.unikue.springstarter.mybatisdelegator.composer.MybatisConfigurationDelegator;
+import com.jiovan.spring.starter.mybatisdelegator.composer.MybatisConfigurationDelegator;
+import jakarta.annotation.Nonnull;
 
 
 /**
