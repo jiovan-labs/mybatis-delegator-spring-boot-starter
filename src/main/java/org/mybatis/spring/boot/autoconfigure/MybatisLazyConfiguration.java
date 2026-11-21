@@ -64,6 +64,7 @@ import jakarta.annotation.Nonnull;
  * @author Josh Long
  * @author Kazuki Shimizu
  * @author Eduardo Macarrón
+ *
  * @see org.mybatis.spring.boot.autoconfigure.MybatisAutoConfiguration
  */
 // @org.springframework.context.annotation.Configuration

@@ -44,6 +44,7 @@ import jakarta.annotation.Nonnull;
  * Configuration for {@link com.jiovan.spring.starter.mybatisdelegator.composer.MybatisConfigurationDelegator}
  *
  * @author David Hsing
+ *
  * @see com.jiovan.spring.starter.mybatisdelegator.composer.MybatisConfigurationDelegator
  */
 @Configuration(proxyBeanMethods = false)
