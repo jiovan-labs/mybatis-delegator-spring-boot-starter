@@ -98,7 +98,7 @@ public class MybatisLazyConfiguration /*implements InitializingBean*/ {
             if (ClassPathWraps.startsWithClasspath(properties.getConfigLocation()) || ClassPathWraps.startsWithClasspathStar(properties.getConfigLocation())) {
                 resource = new ClassPathResource(ClassPathWraps.removeClasspathPrefix(properties.getConfigLocation()), resourceLoader.getClassLoader());
             } else {
-                resource = resourceLoader.getResource(properties.getConfigLocation());    // $NON-NLS-1$
+                resource = resourceLoader.getResource(properties.getConfigLocation());
             }
             Assert.state(resource.exists(), "Cannot find config location: " + resource + " (please add config file or check your Mybatis configuration)");
         }
@@ -155,18 +155,17 @@ public class MybatisLazyConfiguration /*implements InitializingBean*/ {
         }
         Set<String> factoryPropertyNames = Stream.of(new BeanWrapperImpl(SqlSessionFactoryBean.class).getPropertyDescriptors()).map(PropertyDescriptor::getName).collect(Collectors.toSet());
         Class<? extends LanguageDriver> defaultLanguageDriver = properties.getDefaultScriptingLanguageDriver();
-        if (factoryPropertyNames.contains("scriptingLanguageDrivers") && !ObjectUtils.isEmpty(this.languageDrivers)) {
+        if (factoryPropertyNames.contains("scriptingLanguageDrivers") && !ObjectUtils.isEmpty(this.languageDrivers)) {    // $NON-NLS-1$
             // Need to mybatis-spring 2.0.2+
             factory.setScriptingLanguageDrivers(this.languageDrivers);
             if (defaultLanguageDriver == null && this.languageDrivers.length == 1) {
                 defaultLanguageDriver = this.languageDrivers[0].getClass();
             }
         }
-        if (factoryPropertyNames.contains("defaultScriptingLanguageDriver")) {
+        if (factoryPropertyNames.contains("defaultScriptingLanguageDriver")) {    // $NON-NLS-1$
             // Need to mybatis-spring 2.0.2+
             factory.setDefaultScriptingLanguageDriver(defaultLanguageDriver);
         }
-
         return factory.getObject();
     }
 
